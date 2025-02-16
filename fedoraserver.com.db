@@ -1,0 +1,12 @@
+$TTL 1D
+@       IN SOA ns1.fedoraserver.com. admin.fedoraserver.com. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+
+        IN      NS      ns1.fedoraserver.com.
+
+ns1     IN      A       192.168.85.131
+pc1     IN      A       192.168.85.130
