@@ -29,18 +29,22 @@ Verificar que el puerto 53 está escuchando con la IP de nuestro servidor DNS pr
 Para configurar el dominio de nuestro nuestro servidor vamos al directorio donde indicamos los dominios.
 9) cd /var/named
 10) cp -rf named.localhost fedoraserver.com.db
-11) nano fedoraserver.com y reemplazar ---> IN SOA rname.invalid. (
+11) nano fedoraserver.com y:
+
+                            reemplazar ---> IN SOA rname.invalid. (
                                    por ---> IN SOA ns1.fedoraserver.com. admin.fedoraserver.com. (
 
-Agregar las siguientes líneas 
+También agregar las siguientes líneas:
+
                          --->           IN	NS	ns1.fedoraserver.com.
                          ---> ns1	IN	A	192.168.85.131 
                          ---> pc1	IN	A	192.168.85.130
 
 Donde ns1 es la IP de nuestro servidor y pc1 es la dirección de un cliente de prueba. Estos nombres de ns1 y pc1 en esta configuración son importantes porque ahora las direcciones .131 y .130 se pueden manejar como ns1.fedoraserver.com y pc1.fedoraserver.com respectivamente. Cosa que es muy conveniente para un entorno empresarial donde hay muchos hosts. Un ejemplo interesante sería:
+
                          ---> www	IN	A	x.x.x.x
 
-Y así tendríamos el dominio www.fedoraserver.com dentro de nuestra red. Hay una alternativa más adelante para el reverse DNS que sirve un propósito similar. Para que se efectúen los cambios:
+Y así tendríamos el dominio `www.fedoraserver.com` dentro de nuestra red. Hay una alternativa más adelante para el reverse DNS que sirve un propósito similar. Para que se efectúen los cambios:
 
 12) chown named:named fedoraserver.com
 13) systemctl restart named
