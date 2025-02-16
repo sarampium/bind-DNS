@@ -1,6 +1,5 @@
 # bind-DNS
 Un DNS configurado para un servidor Linux RHEL/CentOS/Fedora
-Hecho en Fedora server (misma sintaxis que CentOS y RHEL)
 
 ## Pasos a seguir:
 
