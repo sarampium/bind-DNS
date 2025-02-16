@@ -11,7 +11,7 @@ Hecho en Fedora server (misma sintaxis que CentOS y RHEL)
 
 Debería verse el `named` en el puerto 53 de nuestra interfaz loopback.
 
-Ahora especificamos la dirección del servidor **PRINCIPAL** (`192.168.85.131` de ahora en adelante).
+Ahora especificamos la dirección del servidor **PRINCIPAL** (`192.168.85.131`) de ahora en adelante).
 
 6) `nano named.conf` y:
    
