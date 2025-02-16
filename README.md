@@ -46,7 +46,7 @@ Donde ns1 es la IP de nuestro servidor y pc1 es la dirección de un cliente de p
 
 Y así tendríamos el dominio `www.fedoraserver.com` dentro de nuestra red. Hay una alternativa más adelante para el reverse DNS que sirve un propósito similar. Para que se efectúen los cambios:
 
-12) chown named:named fedoraserver.com
+12) chown named:named `fedoraserver.com`
 13) systemctl restart named
 14) netstat -antu 
 
@@ -54,6 +54,7 @@ Revisar que en el puesto 53 nuestro servidor esté presente.
 
 Finalmente, para que nuestro servidor DNS principal reconozca estos dominios.
 15) nano /etc/named.conf y agregar:
+
  					zone "fedoraserver.com" {
         					type master;
         					file "fedoraserver.com.db";
@@ -63,6 +64,7 @@ Finalmente, para que nuestro servidor DNS principal reconozca estos dominios.
 Para crear uno secundario solo se repiten los pasos anteriores en OTRA MÁQUINA y ahora:
 
 16) nano /etc/named.conf y agregar:
+
  					zone "fedoraserver.com" {
         					type slave;
         					file "slaves/fedoraserver.com.db";
@@ -71,16 +73,20 @@ Para crear uno secundario solo se repiten los pasos anteriores en OTRA MÁQUINA 
 
 De esta forma, esta segunda máquina será un servidor DNS secundario/slave. Completar esta configuración haciendo el siguiente cambio en el DNS primario de nuestra red.
 
-17) nano /etc/named.conf y reemplazar ---> allow-transfer { none; };
+17) nano /etc/named.conf y:
+
+                           reemplazar ---> allow-transfer { none; };
                                   por ---> allow-transfer { 192.168.85.132; };
 
 Suponiendo que la .132 es la dirección del DNS secundario/slave. Podemos agregar también un DNS "superior" que sirva como reespaldo adicional al servidor principal. Este servidor "superior" puede verse como el IPS.
 
 18) nano /etc/named.conf y agregar:
+    
 					forwarders { 8.8.8.8; };
 
 Es importante tener funciones de reverse DNS para poder identificar los dominios asociados a cada dirección IP en ese orden y no al revés. Para esta configuración debemos dirigirnos al servidor DNS principal.
 19) nano /etc/named.conf y agregar:
+
  					zone "0.168.192.in-addr.arpa" {
         					type master;
         					file "0.168.192.db";
@@ -88,10 +94,13 @@ Es importante tener funciones de reverse DNS para poder identificar los dominios
 					};
 20) cd /var/named
 21) cp -rf named.loopback 0.168.192.db
-22) nano 0.168.192.db y reemplazar ---> IN SOA rname.invalid. (
+22) nano 0.168.192.db y:
+
+                        reemplazar ---> IN SOA rname.invalid. (
                                por ---> IN SOA ns1.fedoraserver.com. admin.fedoraserver.com. (
 
-Agregamos 
+También agregamos:
+
 	--->    	IN	NS	ns1.fedoraserver.com.
 	---> 131	IN	PTR	ns1.fedoraserver.com.
 	---> 130	IN	PTR	pc1.fedoraserver.com.
