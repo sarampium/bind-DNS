@@ -25,11 +25,15 @@ Ahora especificamos la dirección del servidor **PRINCIPAL** (`192.168.85.131`) 
 7) `systemctl restart named`
 
 Verificar que el puerto 53 está escuchando con la IP de nuestro servidor DNS primario (.131)
+
 8) `netstat -antp`
 
 Para configurar el dominio de nuestro nuestro servidor vamos al directorio donde indicamos los dominios.
+
 9) `cd /var/named`
+
 10) `cp -rf named.localhost fedoraserver.com.db`
+
 11) `nano fedoraserver.com` y:
 
                             reemplazar ---> IN SOA rname.invalid. (
@@ -117,4 +121,4 @@ Para que el DNS secundario/slave reconozca estas peticiones hay que indicarle el
         					masters { 192.168.85.131; };
 					};
 
-Aplicar systemctl restart named en ambos servidor para que hagas las pruebas que necesites.
+24) Aplicar systemctl restart named en ambos servidor para que hagas las pruebas que necesites.
