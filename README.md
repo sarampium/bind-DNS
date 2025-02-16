@@ -36,7 +36,7 @@ Para configurar el dominio de nuestro nuestro servidor vamos al directorio donde
 
 También agregar las siguientes líneas:
 
-                         --->           IN	NS	ns1.fedoraserver.com.
+                         --->         IN	NS	ns1.fedoraserver.com.
                          ---> ns1	IN	A	192.168.85.131 
                          ---> pc1	IN	A	192.168.85.130
 
