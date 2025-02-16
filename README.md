@@ -13,13 +13,15 @@ Debería verse el "named" en el puerto 53 de nuestra interfaz loopback.
 
 Ahora especificamos la dirección del servidor PRINCIPAL (.85.131 de ahora en adelante).
 
-6) nano named.conf y reemplazar ---> listen-on port 53 { 127.0.0.1; };
+6) nano named.conf y:
+   
+                     reemplazar ---> listen-on port 53 { 127.0.0.1; };
                             por ---> listen-on port 53 { 127.0.0.1; 192.168.85.131; };
 
                      reemplazar ---> allow-query { localhost; }
                             por ---> allow-query { localhost; 192.168.85.0/24; }
 
-7) systemctl restart named
+9) systemctl restart named
 
 Verificar que el puerto 53 está escuchando con la IP de nuestro servidor DNS primario (.131)
 8) netstat -antp 
