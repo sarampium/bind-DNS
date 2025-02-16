@@ -1,6 +1,8 @@
 # bind-DNS
 Un DNS configurado para un servidor Linux RHEL/CentOS/Fedora
 
+Se pueden copiar los archivos de prueba en los directorios con las direcciones de tu red. A continuación están los pasos para configurar los servidores desde cero.
+
 ## Pasos a seguir:
 
 1) `sudo su`
