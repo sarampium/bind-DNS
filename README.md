@@ -58,6 +58,7 @@ Y así tendríamos el dominio `www.fedoraserver.com` dentro de nuestra red. Hay 
 Revisar que en el puesto 53 nuestro servidor esté presente.
 
 Finalmente, para que nuestro servidor DNS principal reconozca estos dominios.
+
 15) `nano /etc/named.conf` y agregar:
 
  					zone "fedoraserver.com" {
